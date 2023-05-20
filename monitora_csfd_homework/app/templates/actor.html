@@ -1,8 +1,10 @@
-{% load static %}
+{% extends "base.html" %}
 
 {% block content %}
-<body>
+<div class="details-header">
     <h1>{{ actor.name }}</h1>
+</div>
+<div class="details-content">
     <h2>Movies:</h2>
     <ul>
         {% for movie in actor.movies.all %}
@@ -11,4 +13,5 @@
             <li>No movies found.</li>
         {% endfor %}
     </ul>
+</div>
 {% endblock %}
