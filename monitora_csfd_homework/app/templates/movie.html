@@ -1,0 +1,13 @@
+{% load static %}
+
+{% block content %}
+    <h1>{{ movie.title }}</h1>
+    <h2>Actors:</h2>
+    <ul>
+        {% for actor in movie.actors.all %}
+            <li><a href="{% url 'actor_detail' actor.id %}">{{ actor.name }}</a></li>
+        {% empty %}
+            <li>No actors found.</li>
+        {% endfor %}
+    </ul>
+{% endblock %}
