@@ -1,43 +1,35 @@
-{% load static %}
-
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Search Movies and Actors</title>
-    <link rel="stylesheet" type="text/css" href="{% static 'css/search.css' %}">
-</head>
-<body>
-    <form method="GET" action="{% url 'search' %}">
-        <div class="search">
-            <input class="search-bar" type="text" name="q" placeholder="Search movies and actors" value="{{ query }}">
-            <button class="search-button" type="submit">Search</button>
-        </div>
-    </form>
-    <div class="results">
-    {% if query %}
-        <div class="movies">
-        <h3>Movies</h3>
-            <ul>
-                {% for movie in movies %}
-                    <li>{{ movie.title }}</li>
-                {% empty %}
-                    <li>No movies found.</li>
-                {% endfor %}
-            </ul>
-        </div>
-        <div class="actors">
-            <h3>Actors</h3>
-            <ul>
-                {% for actor in actors %}
-                    <li>{{ actor.name }}</li>
-                {% empty %}
-                    <li>No actors found.</li>
-                {% endfor %}
-            </ul>
-        </div>
-    {% else %}
-        <p>Enter a search query to get results.</p>
-    {% endif %}
+{% extends "base.html" %}
+{% block content %}
+<form method="GET" action="{% url 'search' %}">
+    <div class="search">
+        <input class="search-bar" type="text" name="q" placeholder="Search movies and actors" value="{{ query }}">
+        <button class="search-button" type="submit">Search</button>
     </div>
-</body>
-</html>
+</form>
+<div class="results">
+    {% if query %}
+    <div class="movies">
+        <h3>Movies</h3>
+        <ul>
+            {% for movie in movies %}
+            <li>{{ movie.title }}</a></li>
+            {% empty %}
+            <li>No movies found.</li>
+            {% endfor %}
+        </ul>
+    </div>
+    <div class="actors">
+        <h3>Actors</h3>
+        <ul>
+            {% for actor in actors %}
+            <li>{{ actor.name }}</a></li>
+            {% empty %}
+            <li>No actors found.</li>
+            {% endfor %}
+        </ul>
+    </div>
+    {% else %}
+    <p>Enter a search query to get results.</p>
+    {% endif %}
+</div>
+{% endblock %}
