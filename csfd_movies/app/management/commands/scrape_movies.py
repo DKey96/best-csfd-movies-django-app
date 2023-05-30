@@ -47,7 +47,7 @@ class Command(BaseCommand):
                 break
             movie_title = movie.find("a", class_="film-title-name").text.strip()
             self.stdout.write(f"Operating movie {movie_title}")
-            new_movie, _ = Movie.objects.get_or_create(title=movie_title)
+            new_movie, _ = Movie.objects.create(title=movie_title)
             movie_link = "https://www.csfd.cz" + movie.find("a", class_="film-title-name")["href"]
             self.get_movie_actors(movie_link, new_movie)
             self.movies_count += 1
@@ -62,5 +62,5 @@ class Command(BaseCommand):
 
         for actor in actors:
             actor_name = actor.text.strip()
-            actor_obj, _ = Actor.objects.get_or_create(name=actor_name)
+            actor_obj, _ = Actor.objects.create(name=actor_name)
             actor_obj.movies.add(movie)

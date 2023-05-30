@@ -7,7 +7,7 @@ from django.shortcuts import render
 def search(request) -> HttpResponse:
     query = request.GET.get("q")
     movies = (
-        Movie.objects.filter(Q(title__icontains=query) | Q(actors__name__icontains=query)).distinct() if query else []
+        Movie.objects.filter(Q(title__icontains=query)).distinct() if query else []
     )
     actors = Actor.objects.filter(name__icontains=query) if query else []
 

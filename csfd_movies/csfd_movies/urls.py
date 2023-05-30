@@ -1,5 +1,5 @@
 """
-URL configuration for monitora_csfd_homework project.
+URL configuration for csfd_movies project.
 
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/4.2/topics/http/urls/

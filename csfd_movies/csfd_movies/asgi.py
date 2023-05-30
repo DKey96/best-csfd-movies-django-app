@@ -1,5 +1,5 @@
 """
-ASGI config for monitora_csfd_homework project.
+ASGI config for csfd_movies project.
 
 It exposes the ASGI callable as a module-level variable named ``application``.
 
@@ -11,6 +11,6 @@ import os
 
 from django.core.asgi import get_asgi_application
 
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'monitora_csfd_homework.settings')
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'csfd_movies.settings')
 
 application = get_asgi_application()

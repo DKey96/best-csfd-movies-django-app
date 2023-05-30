@@ -1,5 +1,5 @@
 """
-WSGI config for monitora_csfd_homework project.
+WSGI config for csfd_movies project.
 
 It exposes the WSGI callable as a module-level variable named ``application``.
 
@@ -11,6 +11,6 @@ import os
 
 from django.core.wsgi import get_wsgi_application
 
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'monitora_csfd_homework.settings')
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'csfd_movies.settings')
 
 application = get_wsgi_application()
