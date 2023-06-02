@@ -1,3 +1,4 @@
+import re
 from typing import Any
 
 import requests
@@ -47,8 +48,9 @@ class Command(BaseCommand):
                 break
             movie_title = movie.find("a", class_="film-title-name").text.strip()
             self.stdout.write(f"Operating movie {movie_title}")
-            new_movie, _ = Movie.objects.create(title=movie_title)
             movie_link = "https://www.csfd.cz" + movie.find("a", class_="film-title-name")["href"]
+            movie_csfd_id = re.findall("/\d*-", movie_link)[0].replace("/", "").replace("-", "")
+            new_movie, _ = Movie.objects.get_or_create(title=movie_title, csfd_id=movie_csfd_id)
             self.get_movie_actors(movie_link, new_movie)
             self.movies_count += 1
 
@@ -61,6 +63,8 @@ class Command(BaseCommand):
             actors = headline.parent.find_all("a", href=lambda href: href and "/tvurce/" in href)
 
         for actor in actors:
+            actor_link = actor.get("href")
+            actor_id = re.findall("/\d*-", actor_link)[0].replace("/", "").replace("-", "")
             actor_name = actor.text.strip()
-            actor_obj, _ = Actor.objects.create(name=actor_name)
+            actor_obj, _ = Actor.objects.get_or_create(name=actor_name, csfd_id=actor_id)
             actor_obj.movies.add(movie)
