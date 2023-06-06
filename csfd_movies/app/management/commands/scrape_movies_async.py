@@ -78,5 +78,5 @@ class Command(BaseCommand):
             actor_link = actor.get("href")
             actor_id = re.findall("/\d*-", actor_link)[0].replace("/", "").replace("-", "")
             actor_name = actor.text.strip()
-            actor_obj, _ = Actor.objects.create(name=actor_name, csfd_id=actor_id)
+            actor_obj, _ = Actor.objects.get_or_create(name=actor_name, csfd_id=actor_id)
             actor_obj.movies.add(movie)
