@@ -17,6 +17,6 @@ class Movie(ModelWithCSFDId):
 
     def save(self, *args, **kwargs):
         if not self.title_normalized:
-            self.name_normalized = strip_accents(self.title)
+            self.title_normalized = strip_accents(self.title)
 
         super().save(*args, **kwargs)
