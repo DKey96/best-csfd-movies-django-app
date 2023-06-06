@@ -1,15 +1,16 @@
-from app.models import Actor, Movie
 from django.db.models import Q
 from django.http import HttpResponse
 from django.shortcuts import render
 
+from app.lib.string_normalization import strip_accents
+from app.models import Movie, Actor
+
 
 def search(request) -> HttpResponse:
-    query = request.GET.get("q")
-    movies = (
-        Movie.objects.filter(Q(title__icontains=query)).distinct() if query else []
-    )
-    actors = Actor.objects.filter(name__icontains=query) if query else []
+    query = request.GET.get("q") or ""
+    query_normalized = strip_accents(query)
+    movies = Movie.objects.filter(Q(title_normalized__icontains=query_normalized)) if query else []
+    actors = Actor.objects.filter(Q(name_normalized__icontains=query_normalized)) if query else []
 
     context = {"query": query or "", "movies": movies or [], "actors": actors or []}
 
